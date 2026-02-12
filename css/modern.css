@@ -15,6 +15,7 @@
 
 html, body {
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -92,9 +93,14 @@ img {
 /* Small screens */
 @media (max-width: 720px) {
   body {
-    width: auto;
-    max-width: none;
+    width: auto !important;
+    max-width: none !important;
     padding: 16px 10px 60px;
+  }
+
+  .main {
+    width: auto !important;
+    max-width: 100% !important;
   }
 
   /* Make legacy columns stack */
