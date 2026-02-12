@@ -18,7 +18,8 @@ html, body {
 }
 
 body {
-  width: auto !important;
+  /* Keep legacy desktop layout mostly intact; only make it nicer visually. */
+  width: 1000px;
   max-width: 1040px;
   margin: 0 auto;
   padding: 28px 16px 80px;
@@ -70,11 +71,7 @@ hr {
   margin: 18px 0;
 }
 
-/* Make legacy columns responsive */
-.left1, .right1, .right2 {
-  float: none;
-  width: auto;
-}
+/* Legacy columns: do NOT change desktop flow. We'll only adjust on small screens. */
 
 .outside {
   margin: 10px 0;
@@ -90,21 +87,32 @@ img {
   height: auto;
 }
 
-/* Thumbnails container */
-.thumbs {
-  width: auto;
-  max-width: 100%;
-}
+/* Thumbnails container: keep legacy width on desktop; adjust on mobile. */
 
 /* Small screens */
 @media (max-width: 720px) {
   body {
+    width: auto;
+    max-width: none;
     padding: 16px 10px 60px;
   }
+
+  /* Make legacy columns stack */
+  .left1, .right1, .right2 {
+    float: none !important;
+    width: auto !important;
+  }
+
+  .thumbs {
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
   .main {
     padding: 18px 14px;
     border-radius: 14px;
   }
+
   h2 { font-size: 22px; }
 }
 
