@@ -1,0 +1,147 @@
+/* V2 redesign: override legacy layout without rewriting the whole HTML.
+   Goals: mobile-first, no horizontal overflow, comfortable spacing.
+*/
+
+:root {
+  --bg: #0b1220;
+  --paper: rgba(255, 255, 255, 0.96);
+  --text: #0f172a;
+  --muted: #475569;
+  --line: rgba(15, 23, 42, 0.10);
+  --accent: #2563eb;
+  --shadow: 0 18px 50px rgba(2, 6, 23, 0.25);
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 18px 12px 60px;
+  background: radial-gradient(1200px 800px at 10% 0%, rgba(37,99,235,0.22), transparent 55%),
+              radial-gradient(900px 600px at 90% 20%, rgba(14,165,233,0.18), transparent 55%),
+              linear-gradient(180deg, #050915, #0b1220 60%, #070b14);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
+  line-height: 1.6;
+}
+
+.container {
+  padding: 0 !important;
+  margin: 0 auto;
+  max-width: 980px;
+}
+
+.main {
+  background: var(--paper);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 18px;
+  padding: 22px 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.article-inner {
+  width: 100% !important;
+  margin-left: 0 !important;
+}
+
+/* Language buttons */
+.article-inner > div[style*="float: right"] {
+  float: none !important;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+button {
+  border: 1px solid rgba(15,23,42,0.12);
+  background: rgba(255,255,255,0.75);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+a, a:visited { color: var(--accent); }
+
+a:hover { text-decoration: none; filter: brightness(0.95); }
+
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--line);
+  margin: 18px 0;
+}
+
+/* Header table -> responsive */
+.article-entry table {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.article-entry td {
+  padding: 0;
+}
+
+/* Spacing */
+.article-entry p { margin: 10px 0; }
+.article-entry ul { margin: 10px 0 14px; padding-left: 18px; }
+.article-entry li { margin: 8px 0; }
+
+.work-exp-li {
+  height: auto !important;
+  line-height: 1.7 !important;
+  margin: 10px 0 14px !important;
+  padding-left: 14px;
+  position: relative;
+}
+
+.work-exp-li-arrow {
+  position: absolute;
+  left: 0;
+  margin-left: 0;
+}
+
+/* Images */
+img { max-width: 100%; height: auto; }
+
+@media (max-width: 720px) {
+  body { padding: 14px 10px 48px; font-size: 16px; }
+  .main { padding: 18px 14px; border-radius: 14px; }
+
+  /* Stack header cells */
+  .article-entry table,
+  .article-entry tbody,
+  .article-entry tr,
+  .article-entry td {
+    display: block;
+    width: 100% !important;
+  }
+
+  .article-entry td[align="left"] {
+    padding-left: 0 !important;
+  }
+
+  .article-entry td[align="center"] img {
+    width: 72vw;
+    max-width: 320px;
+    height: auto !important;
+  }
+
+  /* kill nowrap that causes overflow */
+  .article-entry td[nowrap] { white-space: normal !important; }
+}
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .main { box-shadow: none; border: 0; border-radius: 0; background: #fff; padding: 0; }
+}
